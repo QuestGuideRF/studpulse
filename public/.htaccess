@@ -1,0 +1,28 @@
+Options -Indexes
+DirectoryIndex index.php
+<IfModule mod_mime.c>
+AddType text/javascript .mjs
+</IfModule>
+RewriteEngine On
+RewriteCond %{HTTP:Authorization} !^$
+RewriteRule ^ - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+RewriteRule ^(?:app|api/routes|config|database|vendor|tests|docs|storage)(?:/|$) - [F,L]
+RewriteRule (^|/)\. - [F,L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [QSA,L]
+<IfModule mod_headers.c>
+Header always set X-Content-Type-Options "nosniff"
+Header always set Referrer-Policy "no-referrer"
+Header always setifempty X-Frame-Options "DENY"
+<FilesMatch "\.(?:css|m?js|svg)$">
+Header set Cache-Control "public, max-age=3600"
+</FilesMatch>
+<Files "service-worker.js">
+Header onsuccess unset Cache-Control
+Header always set Cache-Control "no-cache, max-age=0, must-revalidate"
+</Files>
+</IfModule>
+<IfModule mod_deflate.c>
+AddOutputFilterByType DEFLATE text/html text/css text/javascript application/json image/svg+xml
+</IfModule>

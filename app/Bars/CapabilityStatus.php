@@ -1,0 +1,1 @@
+<?php declare(strict_types=1);namespace StudPulse\Bars;enum CapabilityStatus:string{case Supported='supported';case Unsupported='unsupported';case NeedsPermission='needs_permission';case TemporarilyUnavailable='temporarily_unavailable';}

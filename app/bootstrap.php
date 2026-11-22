@@ -1,0 +1,1 @@
+<?php declare(strict_types=1);define('ROOT',dirname(__DIR__));spl_autoload_register(static function(string$class):void{$prefix='StudPulse\\';if(str_starts_with($class,$prefix)){$path=ROOT.'/app/'.str_replace('\\','/',substr($class,strlen($prefix))).'.php';if(is_file($path)){require$path;}}});date_default_timezone_set('UTC');StudPulse\Config::load(ROOT.'/.env');

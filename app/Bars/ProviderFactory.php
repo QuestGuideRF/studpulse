@@ -1,0 +1,1 @@
+<?php declare(strict_types=1);namespace StudPulse\Bars;use StudPulse\Config;use StudPulse\Security\Auth;final class ProviderFactory{public static function make(Auth$a):BarsProvider{return Config::get('BARS_PROVIDER_MODE')==='official'?new BarsOfficialAdapter($a):new UnavailableAdapter();}}

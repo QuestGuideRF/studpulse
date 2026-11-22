@@ -1,0 +1,9 @@
+{
+  "name": "studpulse/student-portal",
+  "description": "Independent student workspace, PHP and MySQL 8.0",
+  "type": "project",
+  "require": {"php": ">=8.2", "ext-pdo": "*", "ext-pdo_mysql": "*", "ext-mbstring": "*", "ext-fileinfo": "*", "ext-openssl": "*", "ext-sodium": "*", "ext-curl": "*", "ext-zip": "*"},
+  "autoload": {"psr-4": {"StudPulse\\": "app/"}},
+  "scripts": {"setup": "@php bin/setup.php"},
+  "config": {"sort-packages": true}
+}

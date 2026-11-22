@@ -1,0 +1,8 @@
+<?php declare(strict_types=1);namespace StudPulse\Domain;use StudPulse\Database\DB;use StudPulse\Http\ApiError;final class LibraryGroup{public static function selected(string$userId):?string{return DB::one('SELECT '.self::preference('p','u.id').' AS group_id FROM users u LEFT JOIN user_preferences p ON p.user_id=u.id WHERE u.id=?',[$userId])['group_id']??null;}public static function preference(string$alias,string$user='u.id'):string{return"COALESCE((SELECT gm.group_id FROM group_memberships gm JOIN academic_groups g ON g.id=gm.group_id AND g.archived_at IS NULL
+            JOIN terms t ON t.id=gm.term_id AND t.archived_at IS NULL AND UTC_DATE() BETWEEN t.begins_at AND t.ends_at
+            WHERE gm.user_id=$user AND gm.valid_from<=UTC_TIMESTAMP(6) AND gm.valid_to>UTC_TIMESTAMP(6)
+            ORDER BY (gm.role IN ('headman','deputy')) DESC,gm.verified_at DESC,gm.id DESC LIMIT 1),
+            NULLIF($alias.preferences->>'$.libraryGroupId',''))";}public static function catalog():array{return DB::all('SELECT g.id,g.canonical_code AS code,g.academic_year FROM academic_groups g WHERE g.archived_at IS NULL ORDER BY g.canonical_code,g.academic_year DESC');}public static function scope(string$id):array{return DB::one('SELECT g.id AS group_id,g.canonical_code AS code,
+            (SELECT t.id FROM terms t WHERE t.university_id=g.university_id AND t.archived_at IS NULL
+                AND UTC_DATE() BETWEEN t.begins_at AND t.ends_at ORDER BY t.begins_at DESC,t.id LIMIT 1) AS term_id
+            FROM academic_groups g WHERE g.id=? AND g.archived_at IS NULL',[$id])??throw new ApiError(422,'LIBRARY_GROUP_INVALID','Выберите действующую группу в настройках библиотеки');}}
