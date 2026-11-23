@@ -685,19 +685,5 @@ php bin/maintenance.php --purge-expired
 
 ---
 
-## Разработка и сопровождение
-
-**Где искать проблему:**
-
-- Вход и сессии: `app/Http/BarsAuthController.php`, `app/Bars/BarsClient.php`, `app/Security/Auth.php`.
-- Оценки, посещаемость и ссылки БАРС: `app/Bars/BarsOfficialAdapter.php`, `BarsSections.php`, `BarsHtml.php`, `BarsStatistics.php`.
-- Журнал: `app/Bars/BarsTrainingJournal.php`, `BarsLesson.php`, `BarsJournal.php`, `app/Http/BarsJournalController.php`.
-- Расписание: `app/Integrations/MpeiSchedule.php`, `ScheduleSubgroups.php`, `app/Http/StudyController.php`.
-- Библиотека/Drive: `app/Http/MaterialsController.php`, `app/Integrations/DriveLibrary.php`, `DriveSync.php`, `DriveSyncWorker.php`.
-- Worker/Push: `bin/cron.php`, `app/Domain/Reminders.php`, `app/Integrations/WebPush.php`.
-- Веб-страницы: `public/assets/js/pages-*.js`, `app.js`, `public/assets/css/app.css`, `study.css`.
-- API: `api/routes.php`, `api/openapi.php`, `app/Http/Router.php`; БД: `database/schema.sql`.
-
-**Поддерживайте этот README как документацию реального состояния:** при добавлении API обновляйте маршруты и OpenAPI, при появлении новых модулей — список функций и требований, при изменении БАРС — фактические формы/пути и обработку ошибок. Не утверждайте, что функциональность готова, лишь потому что она есть в планах или в старой переписке.
-
-**Источники:** исходники `studpulse(7).zip` и предоставленная история разработки `Вставленный текст(10).txt`. Примеры сессий, паролей и API-токенов в документ намеренно не включены.
+Автор: legenda  
+Telegram: [@LEGENDA_SD](https://t.me/LEGENDA_SD)
